@@ -1,4 +1,4 @@
-# NBA Score Application Changelog
+# NBA Score App Changelog
 
 ## v1.0.1-dev
 
