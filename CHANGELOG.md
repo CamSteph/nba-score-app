@@ -2,7 +2,13 @@
 
 ## v1.0.1-dev
 
+### Changes
 
+- Fix table border-radius
+
+### Removals
+
+- Remove unused or commented out code
 
 ---
 
