@@ -12,10 +12,6 @@ const PlayerTableWrapper = styled.table`
   padding: 15px;
   text-align: center;
   border-collapse:collapse;
-
-  /* :nth-child(even) :hover{
-    background: rgba(255, 255, 255, .2);
-  } */
 `;
 
 const TableRow = styled.tr`
@@ -25,14 +21,13 @@ const TableRow = styled.tr`
 const TableHeader = styled.th`
   background: rgba(0, 0, 0, .5);
   padding: 15px;
-  /* border-radius: 6px; */
 
-  :first-child(1){
-    border-top-left-radius: 6px;
+  :first-child{
+    border-top-left-radius: 10px;
   }
 
   :last-child{
-    border-top-right-radius: 6px;
+    border-top-right-radius: 10px;
   }
 
   div{
@@ -46,9 +41,6 @@ const TableHeader = styled.th`
       margin-left: 5px;
       cursor: pointer;
       
-      .caret{
-        /* color: red; */
-      }
       .clicked{
         color: ${customStyles.accent_shade_03} !important;
       }
@@ -62,7 +54,7 @@ const TableData = styled.td`
 `;
 
 const TableHead = styled.thead`
-
+  border-radius: 6px;
 `;
 
 const TableBody = styled.tbody`
