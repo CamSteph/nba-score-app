@@ -83,7 +83,7 @@ const FilterBar = ({
                 onChange={inputData.onChange} 
               />
               {
-                inputData.clearSearch && inputData.value
+                (inputData.clearSearch && inputData.value)
               && 
                 (<span onClick={inputData.clearSearch}>
                   <FaTimes />
