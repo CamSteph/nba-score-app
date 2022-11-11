@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
 import GetPlayerData from '../../containers/GetPlayerData';
@@ -23,10 +23,33 @@ const PlayersPageTitle = styled.h1`
 `;
 
 const PlayersPage = () => {
+
+  const setSearch = () => {
+    return sessionStorage.getItem('team-search') || '';
+  };
+
+  const [filterSearch, setFilterSearch] = useState(setSearch());
+
+  const filterInputsData = [
+      {
+        label: "Find your favorite player",
+        type: "text",
+        name: "player-filter",
+        value: filterSearch,
+        placeholder: 'i.e., Kevin Durant',
+        onChange:  (e) => {
+          setFilterSearch(e.target.value);
+        },
+        clearSearch: () => {
+          setFilterSearch('')
+        },
+      },
+  ];
+
   return (
     <PlayersPageWrapper>
       <PlayersPageTitle>View your <strong>favorite</strong> players!</PlayersPageTitle>
-      <FilterBar />
+      <FilterBar filterInputsData={filterInputsData} />
       <GetPlayerData />
     </PlayersPageWrapper>
   );

@@ -63,54 +63,36 @@ const InputGroupWrapper = styled.div`
 `;
 
 const FilterBar = ({
-  todaysDate, 
-  setTodaysDate,
-  filterSearch,
-  setFilterSearch,
+  filterInputsData
 }) => {
-
-  const filterByDate = (e) => {
-    const updatedDate = e.target.value;
-    setTodaysDate(updatedDate);
-    sessionStorage.setItem('curr-date', updatedDate);
-  };
-
-  const filterByName = (e) => {
-    setFilterSearch(e.target.value);
-  }
-
-  const clearFilterSearch = () => {
-    setFilterSearch('');
-  }
 
   return (
     <FilterBarWrapper>
-      <InputGroupWrapper>
-        <LabelElement htmlFor="date">Filter by date:</LabelElement>
-        <InputElement 
-          type="date" 
-          name="date" 
-          value={todaysDate} 
-          onChange={filterByDate} 
-        />
-      </InputGroupWrapper>
-      <InputGroupWrapper>
-        <LabelElement htmlFor="search">Filter by team:</LabelElement>
-        <InputElement 
-          type="text" 
-          name="search" 
-          placeholder='Ex: Hawks' 
-          onChange={filterByName} 
-          value={filterSearch} 
-        />
-        {
-          filterSearch 
-        && 
-        (<span onClick={clearFilterSearch}>
-          <FaTimes />
-        </span>)   
-        }
-      </InputGroupWrapper>
+      {
+        filterInputsData
+      &&
+        (
+          filterInputsData.map((inputData, i) => (
+            <InputGroupWrapper key={i}>
+              <LabelElement htmlFor={inputData.name}>{inputData.label}:</LabelElement>
+              <InputElement 
+                type={inputData.type} 
+                name={inputData.name}
+                value={inputData.value}
+                placeholder={inputData.placeholder}
+                onChange={inputData.onChange} 
+              />
+              {
+                inputData.clearSearch && inputData.value
+              && 
+                (<span onClick={inputData.clearSearch}>
+                  <FaTimes />
+                </span>)
+              }
+            </InputGroupWrapper>
+          ))
+        )
+      }
     </FilterBarWrapper>
   );
 };

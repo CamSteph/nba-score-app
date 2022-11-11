@@ -47,16 +47,41 @@ const HomePage = () => {
 
   const [todaysDate, setTodaysDate] = useState(setDate());
   const [filterSearch, setFilterSearch] = useState(setSearch());
-  // const [debounceSerarchValue, setDebouneSearchValue] = useDebounce(filterSearch, 500);
+
+  const filterInputsData = [
+    {
+        label: "Filter by date",
+        type: "date",
+        name: "date-filter",
+        value: todaysDate,
+        placeholder: null,
+        onChange:  (e) => {
+          const updatedDate = e.target.value;
+          setTodaysDate(updatedDate);
+          sessionStorage.setItem('curr-date', updatedDate);
+        },
+        clearSearch: null,
+      },
+      {
+        label: "Filter by team",
+        type: "text",
+        name: "team-filter",
+        value: filterSearch,
+        placeholder: 'i.e., Hawks',
+        onChange:  (e) => {
+          setFilterSearch(e.target.value);
+        },
+        clearSearch: () => {
+          setFilterSearch('')
+        },
+      },
+  ];
 
   return (
     <HomePageWrapper>
       <HomeTitle>Today's Games</HomeTitle>
       <FilterBar 
-        todaysDate={todaysDate} 
-        setTodaysDate={setTodaysDate} 
-        filterSearch={filterSearch} 
-        setFilterSearch={setFilterSearch}
+        filterInputsData={filterInputsData}
       />
       <CardsContainer>
         <GetScoreData 
