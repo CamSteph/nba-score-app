@@ -1,5 +1,13 @@
 # NBA Score App Changelog
 
+## v1.0.2-dev (11/11/2022)
+
+### Changes
+
+- Change filter component to be more reusable
+
+---
+
 ## v1.0.1-dev (11/10/2022)
 
 ### Changes
