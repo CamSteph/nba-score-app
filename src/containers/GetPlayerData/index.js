@@ -3,11 +3,13 @@ import { GET_PLAYERS_DATA_API } from '../../utilities/apiUrls';
 import { httpRequest } from '../../utilities/httpRequests';
 import PlayerTable from '../../components/PlayersTable';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { useDebounce } from '../../utilities/useDebounce';
 
-const GetPlayerData = () => {
+const GetPlayerData = ({filterSearch}) => {
 
   const [playersData, setPlayersData] = useState([]);
   const [tableSortStatus, setTableSortStatus] = useState('id-up');
+  const debounceSearchValue = useDebounce(filterSearch, 700);
 
   const sortTable = (data) => {
     // if ( typeof data === 'object' ) return [data];
@@ -73,14 +75,14 @@ const GetPlayerData = () => {
 
   useEffect(() => {
     const waitForReturnedData = async () => {
-      const returnedPlayersData = await httpRequest('get', GET_PLAYERS_DATA_API, {});
+      const returnedPlayersData = await httpRequest('get', `${GET_PLAYERS_DATA_API}${filterSearch}`, {});
       setPlayersData(sortTable(returnedPlayersData.data));
       returnedPlayersData.error && console.log(returnedPlayersData?.error?.status);
     }
 
     waitForReturnedData();
 
-  }, [tableSortStatus]);
+  }, [tableSortStatus, debounceSearchValue]);
 
   const displayPlayerData = (player) => {
     console.log(player);

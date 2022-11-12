@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaSearch } from "react-icons/fa";
 
 const FilterBarWrapper = styled.section`
   width: 92%;
@@ -62,37 +62,61 @@ const InputGroupWrapper = styled.div`
   }
 `;
 
+const InputSearchWrapper = styled.div`
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: ${customStyles.light_shade_01};
+  margin-right: 10px;
+`;
+
 const FilterBar = ({
   filterInputsData
 }) => {
 
   return (
     <FilterBarWrapper>
-      {
-        filterInputsData
-      &&
-        (
-          filterInputsData.map((inputData, i) => (
-            <InputGroupWrapper key={i}>
-              <LabelElement htmlFor={inputData.name}>{inputData.label}:</LabelElement>
-              <InputElement 
-                type={inputData.type} 
-                name={inputData.name}
-                value={inputData.value}
-                placeholder={inputData.placeholder}
-                onChange={inputData.onChange} 
-              />
-              {
-                (inputData.clearSearch && inputData.value)
-              && 
-                (<span onClick={inputData.clearSearch}>
-                  <FaTimes />
-                </span>)
-              }
-            </InputGroupWrapper>
-          ))
-        )
-      }
+      {filterInputsData.map((inputData, i) => (
+        <InputGroupWrapper key={i}>
+          <LabelElement htmlFor={inputData?.name}>{inputData?.label}:</LabelElement>
+          {
+            inputData?.type === 'text' ?
+              (
+                <InputSearchWrapper>
+                <FaSearch />
+                <InputElement 
+                  type={inputData?.type} 
+                  name={inputData?.name}
+                  value={inputData?.value}
+                  placeholder={inputData?.placeholder}
+                  onChange={inputData?.onChange} 
+                />
+                </InputSearchWrapper>
+              )
+            :
+              (
+                <InputElement 
+                  type={inputData?.type} 
+                  name={inputData?.name}
+                  value={inputData?.value}
+                  placeholder={inputData?.placeholder}
+                  onChange={inputData?.onChange} 
+                />
+              )
+          }
+          {
+            (inputData?.clearSearch && inputData?.value)
+          && 
+            (
+              <span onClick={inputData?.clearSearch}>
+                <FaTimes />
+              </span>
+            )
+          }
+        </InputGroupWrapper>
+      ))}
     </FilterBarWrapper>
   );
 };
