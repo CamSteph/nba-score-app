@@ -1,6 +1,6 @@
 # NBA Score App Changelog
 
-## v1.0.2-dev (11/12/2022)
+## v1.0.3-dev (11/12/2022)
 
 ### Additions
 
