@@ -1,5 +1,18 @@
 # NBA Score App Changelog
 
+## v1.0.2-dev (11/12/2022)
+
+### Additions
+
+- Add skeleton loader for API calls
+
+### Changes
+
+- Change modal loading functionality
+
+---
+
+
 ## v1.0.2-dev (11/11/2022)
 
 ### Changes
