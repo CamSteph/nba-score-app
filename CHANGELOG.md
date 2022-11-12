@@ -1,5 +1,18 @@
 # NBA Score App Changelog
 
+## v1.0.4-dev (11/12/2022)
+
+### Additions
+
+- Implement debouncing for players table
+
+### Changes
+
+- Update players API call URL
+
+---
+
+
 ## v1.0.3-dev (11/12/2022)
 
 ### Additions
@@ -11,7 +24,6 @@
 - Change modal loading functionality
 
 ---
-
 
 ## v1.0.2-dev (11/11/2022)
 
