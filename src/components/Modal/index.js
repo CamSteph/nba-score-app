@@ -4,9 +4,9 @@ import { customStyles } from '../../utilities/customStyles';
 import { GET_TEAM_DATA_API } from '../../utilities/apiUrls';
 import { httpRequest } from '../../utilities/httpRequests';
 import { teamColors } from '../../utilities/teamColors';
+import SkeletonLoader from '../SkeletonLoader';
 
 const ModalContainer = styled.div`
-  /* margin-top: 60px; */
   width: 100%;
   height: 100%;
   position: fixed;
@@ -76,6 +76,7 @@ const CloseModalBtn = styled.button`
 const Modal = ({teamClicked, setTeamClicked, teamId}) => {
 
   const [teamData, setTeamData] = useState([]);
+  const [isFetchingData, setisFetchingData] = useState(false);
 
   useEffect(() => {
 
@@ -83,10 +84,14 @@ const Modal = ({teamClicked, setTeamClicked, teamId}) => {
       const returnedTeamData = await httpRequest('get', `${GET_TEAM_DATA_API}${teamId}`, {});
       setTeamData(returnedTeamData.data);
       returnedTeamData.error && console.log(returnedTeamData?.error);
+      setisFetchingData(false);
     }
 
     if(teamId) {
-      waitForReturnedData();
+      setisFetchingData(true);
+      setTimeout(() => {
+        waitForReturnedData();
+      }, 600);
     }
 
   }, [teamId]);
@@ -98,26 +103,81 @@ const Modal = ({teamClicked, setTeamClicked, teamId}) => {
   return (
     <ModalContainer teamClicked={teamClicked}>
       <ModalContentWrapper teamClicked={teamClicked}>
-        <ModalItemGroup topRow={true}>
-          <ModalItemTitle topRow={true} abbv={teamData.abbreviation}>{teamData.full_name}</ModalItemTitle>
-          <ModalItemData>ID #{teamId}</ModalItemData>
-        </ModalItemGroup>
-        <ModalItemGroup>
-          <ModalItemTitle>City:</ModalItemTitle>
-          <ModalItemData>{teamData.city}</ModalItemData>
-        </ModalItemGroup>
-        <ModalItemGroup>
-          <ModalItemTitle>Abbreviation:</ModalItemTitle>
-          <ModalItemData>{teamData.abbreviation}</ModalItemData>
-        </ModalItemGroup>
-        <ModalItemGroup>
-          <ModalItemTitle>Conference:</ModalItemTitle>
-          <ModalItemData>{teamData.conference}ern</ModalItemData>
-        </ModalItemGroup>
-        <ModalItemGroup>
-          <ModalItemTitle>Division:</ModalItemTitle>
-          <ModalItemData>{teamData.division}</ModalItemData>
-        </ModalItemGroup>
+        {
+          isFetchingData
+          ?
+          (
+            <>
+            <ModalItemGroup topRow={true}>
+              <ModalItemTitle topRow={true} abbv={null}>
+                  <SkeletonLoader loaderLength='long' />
+              </ModalItemTitle>
+              <ModalItemData>
+                <SkeletonLoader loaderLength='short' />
+                </ModalItemData>
+            </ModalItemGroup>
+            <ModalItemGroup>
+              <ModalItemTitle>
+                <SkeletonLoader loaderLength='short' />
+                </ModalItemTitle>
+              <ModalItemData>
+                <SkeletonLoader loaderLength='long' />
+                </ModalItemData>
+            </ModalItemGroup>
+            <ModalItemGroup>
+              <ModalItemTitle>
+                <SkeletonLoader loaderLength='short' />
+                </ModalItemTitle>
+              <ModalItemData>
+                <SkeletonLoader loaderLength='long' />
+                </ModalItemData>
+            </ModalItemGroup>
+            <ModalItemGroup>
+              <ModalItemTitle>
+                <SkeletonLoader loaderLength='short' />
+                </ModalItemTitle>
+              <ModalItemData>
+                <SkeletonLoader loaderLength='long' />
+                </ModalItemData>
+            </ModalItemGroup>
+            <ModalItemGroup>
+              <ModalItemTitle>
+                <SkeletonLoader loaderLength='short' />
+                </ModalItemTitle>
+              <ModalItemData>
+                <SkeletonLoader loaderLength='long' />
+                </ModalItemData>
+            </ModalItemGroup>
+          </>
+          )
+        :
+        (
+          <>
+          <ModalItemGroup topRow={true}>
+            <ModalItemTitle topRow={true} abbv={teamData.abbreviation}>
+              {teamData.full_name}
+            </ModalItemTitle>
+            <ModalItemData>ID #{teamId}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>City:</ModalItemTitle>
+            <ModalItemData>{teamData.city}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Abbreviation:</ModalItemTitle>
+            <ModalItemData>{teamData.abbreviation}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Conference:</ModalItemTitle>
+            <ModalItemData>{teamData.conference}ern</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Division:</ModalItemTitle>
+            <ModalItemData>{teamData.division}</ModalItemData>
+          </ModalItemGroup>
+          </>
+        )
+        }
         <CloseModalBtn onClick={closeModal}>Close</CloseModalBtn>
       </ModalContentWrapper>
     </ModalContainer>
