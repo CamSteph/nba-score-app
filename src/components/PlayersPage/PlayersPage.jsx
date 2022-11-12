@@ -29,7 +29,6 @@ const PlayersPage = () => {
   };
 
   const [filterSearch, setFilterSearch] = useState(setSearch());
-  const [playerNameValue, setPlayerNameValue] = useState('');
 
   const filterInputsData = [
       {
@@ -50,8 +49,8 @@ const PlayersPage = () => {
   return (
     <PlayersPageWrapper>
       <PlayersPageTitle>View your <strong>favorite</strong> players!</PlayersPageTitle>
-      <FilterBar filterInputsData={filterInputsData} setPlayerNameValue={setPlayerNameValue} />
-      <GetPlayerData playerNameValue={playerNameValue} setPlayerNameValue={setPlayerNameValue} filterSearch={filterSearch} />
+      <FilterBar filterInputsData={filterInputsData} />
+      <GetPlayerData filterSearch={filterSearch} />
     </PlayersPageWrapper>
   );
 };
