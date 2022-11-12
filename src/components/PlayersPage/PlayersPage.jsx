@@ -50,7 +50,7 @@ const PlayersPage = () => {
     <PlayersPageWrapper>
       <PlayersPageTitle>View your <strong>favorite</strong> players!</PlayersPageTitle>
       <FilterBar filterInputsData={filterInputsData} />
-      <GetPlayerData />
+      <GetPlayerData filterSearch={filterSearch} />
     </PlayersPageWrapper>
   );
 };
