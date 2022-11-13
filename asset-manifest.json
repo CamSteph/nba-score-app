@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/CamSteph/nba-score-app/static/css/main.736b227b.css",
+    "main.js": "/CamSteph/nba-score-app/static/js/main.1a8c831c.js",
+    "static/media/warriors.png": "/CamSteph/nba-score-app/static/media/warriors.2ba777bf82b2a6219d34.png",
+    "static/media/celtics.png": "/CamSteph/nba-score-app/static/media/celtics.ad0a612cb8c07b6fdb12.png",
+    "static/media/bucks.png": "/CamSteph/nba-score-app/static/media/bucks.ece3a786f49ec5358c2c.png",
+    "static/media/mavericks.png": "/CamSteph/nba-score-app/static/media/mavericks.778fa1a7405d2fe36dca.png",
+    "static/media/76ers.png": "/CamSteph/nba-score-app/static/media/76ers.f2b5c113a1c1b48ac2f8.png",
+    "static/media/cavaliers.png": "/CamSteph/nba-score-app/static/media/cavaliers.19e057f6fb0f20fe4fdf.png",
+    "static/media/wizards.png": "/CamSteph/nba-score-app/static/media/wizards.6474737b3fc7875e1629.png",
+    "static/media/timberwolves.png": "/CamSteph/nba-score-app/static/media/timberwolves.0fcf5d6fe44d610fc2d7.png",
+    "static/media/hawks.png": "/CamSteph/nba-score-app/static/media/hawks.c25c810bd41585fa990b.png",
+    "static/media/nuggets.png": "/CamSteph/nba-score-app/static/media/nuggets.d5b9fc7c53eebd6b6870.png",
+    "static/media/thunder.png": "/CamSteph/nba-score-app/static/media/thunder.0ab793e5c2509dbc0702.png",
+    "static/media/pacers.png": "/CamSteph/nba-score-app/static/media/pacers.e2c22c5623bf8267437d.png",
+    "static/media/pelicans.png": "/CamSteph/nba-score-app/static/media/pelicans.ff8f683efc654a1de368.png",
+    "static/media/suns.png": "/CamSteph/nba-score-app/static/media/suns.16baf9991e98cafb0a3e.png",
+    "static/media/hornets.png": "/CamSteph/nba-score-app/static/media/hornets.5e34681b0a84431b93f4.png",
+    "static/media/nets.png": "/CamSteph/nba-score-app/static/media/nets.b22028265a8d6b2b4c08.png",
+    "static/media/knicks.png": "/CamSteph/nba-score-app/static/media/knicks.602045b4207332dfa8d7.png",
+    "static/media/raptors.png": "/CamSteph/nba-score-app/static/media/raptors.1b8c0b9014d563a34d20.png",
+    "static/media/heat.png": "/CamSteph/nba-score-app/static/media/heat.6b67af741d2d2cd7cc7d.png",
+    "static/media/pistons.png": "/CamSteph/nba-score-app/static/media/pistons.fea21a820f028bf7f674.png",
+    "static/media/magic.png": "/CamSteph/nba-score-app/static/media/magic.022119c47fe1b2c8c6d5.png",
+    "static/media/grizzlies.png": "/CamSteph/nba-score-app/static/media/grizzlies.8a0f6e19a4a3c2d47177.png",
+    "static/media/bulls.png": "/CamSteph/nba-score-app/static/media/bulls.92362cb87c0de9c5db39.png",
+    "static/media/lakers.png": "/CamSteph/nba-score-app/static/media/lakers.8ff87653ab84c7ca3dbd.png",
+    "static/media/jazz.png": "/CamSteph/nba-score-app/static/media/jazz.9646296e531096bb17a6.png",
+    "static/media/kings.png": "/CamSteph/nba-score-app/static/media/kings.007bdb6226f8eeecae05.png",
+    "static/media/clippers.png": "/CamSteph/nba-score-app/static/media/clippers.ce175e881d73604ce01b.png",
+    "static/media/trailblazers.png": "/CamSteph/nba-score-app/static/media/trailblazers.a105c54c0222c538eb54.png",
+    "static/media/rockets.png": "/CamSteph/nba-score-app/static/media/rockets.10212dccdf7642311c26.png",
+    "static/media/spurs.png": "/CamSteph/nba-score-app/static/media/spurs.c249c4970684eea9fb04.png",
+    "index.html": "/CamSteph/nba-score-app/index.html",
+    "main.736b227b.css.map": "/CamSteph/nba-score-app/static/css/main.736b227b.css.map",
+    "main.1a8c831c.js.map": "/CamSteph/nba-score-app/static/js/main.1a8c831c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.736b227b.css",
+    "static/js/main.1a8c831c.js"
+  ]
+}
