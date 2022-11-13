@@ -12,6 +12,7 @@ const PlayerTableWrapper = styled.table`
   padding: 15px;
   text-align: center;
   border-collapse:collapse;
+  position: relative;
 `;
 
 const TableRow = styled.tr`
@@ -51,6 +52,7 @@ const TableHeader = styled.th`
 
 const TableData = styled.td`
   padding: 10px;
+  font-weight: 500;
 `;
 
 const TableHead = styled.thead`
@@ -80,6 +82,11 @@ const TableBody = styled.tbody`
   }
 `;
 
+const PlayerDataWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+`;
+
 const PlayerTable = ({
   playersData, 
   displayPlayerData,
@@ -92,7 +99,7 @@ const PlayerTable = ({
   };
 
   return (
-    <PlayerTableWrapper>
+    <PlayerTableWrapper expand>
       <TableHead>
         <TableRow>
             <TableHeader>
@@ -135,6 +142,9 @@ const PlayerTable = ({
               <TableData>{player.first_name}</TableData>
               <TableData>{player.last_name}</TableData>
             </TableRow>
+            {/* <PlayerDataWrapper>
+              THIS IS THE DATA
+            </PlayerDataWrapper> */}
           </TableBody>
         )
       })

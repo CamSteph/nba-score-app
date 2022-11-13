@@ -4,7 +4,7 @@ import { customStyles } from '../../utilities/customStyles';
 
 const ScoreCardWrapper = styled.div`
   width: 300px;
-  height: 220px;
+  height: 180px;
   border-radius: 8px;
   background-color: rgba(255, 225, 225, 0.10);
   transition: box-shadow .5s ease;
@@ -24,10 +24,17 @@ const TeamWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${props => props.winner ? customStyles.accent_shade_01 : '#ccc'};
+  background: transparent;
+  color: ${props => props.winner ? 'rgba(255, 255, 255, .9)' : 'rgba(255, 255, 255, .4)'};
   padding: 10px;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 1.5 ease;
+
+  :hover{
+    background: rgba(220, 220, 220, .2);
+    color: ${props => props.winner ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, .6)'};
+  }
 `;
 
 const DisplayQuarter = styled.span`
@@ -39,29 +46,34 @@ const DisplayQuarter = styled.span`
   letter-spacing: 1.2px;
 `;
 
-const VersusText = styled.span`
-  font-size: ${customStyles.medium_font_size}px;
-  text-align: center;
-  color: ${customStyles.accent_shade_02};
-  filter: opacity(.75);
-  font-weight: bold;
-  user-select: none;
+const TeamLogoImg = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 10px;
+  object-fit: cover;
+`;
+
+const TeamNameWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
 const ScoreCard = ({
-  homeTeamAbbreviation,
-  visitorTeamAbbreviation,
   homeTeamName,
-  visitorTeamName,
   homeTeamScore,
+  homeTeamId,
+  homeTeamLogo,
+  visitorTeamName,
   visitorTeamScore,
+  visitorTeamId,
+  visitorTeamLogo,
   period,
   gameStatus,
   teamClicked,
   setTeamClicked,
-  homeTeamId,
-  visitorTeamId,
-  teamId,
   setTeamId,
 }) => {
 
@@ -81,7 +93,7 @@ const ScoreCard = ({
       case 4:
         return '4th Quarter';
       default:
-        return 'Tip-off: TBD';
+        return 'TBD';
     };
   };
 
@@ -97,13 +109,18 @@ const ScoreCard = ({
             <DisplayQuarter>{formatPeriod(period) || '0'}</DisplayQuarter>
         }
           <TeamWrapper winner={visitorTeamScore > homeTeamScore ? true : false} onClick={() => loadModal(visitorTeamId)}>
-            <h3>{visitorTeamName || 'NULL'}</h3>
-            <h3>{visitorTeamScore|| '0'}</h3>
+            <TeamNameWrapper>
+              <TeamLogoImg src={visitorTeamLogo} />
+              <h3>{visitorTeamName || 'NULL'}</h3>
+            </TeamNameWrapper>
+            <h3>{visitorTeamScore || '0'}</h3>
           </TeamWrapper>
-        <VersusText>@</VersusText>
           <TeamWrapper winner={homeTeamScore > visitorTeamScore ? true : false} onClick={() => loadModal(homeTeamId)}>
-            <h3>{homeTeamName || 'NULL'}</h3>
-            <h3>{homeTeamScore|| '0'}</h3>
+            <TeamNameWrapper>
+              <TeamLogoImg src={homeTeamLogo} alt="Team logo" />
+              <h3>{homeTeamName || 'NULL'}</h3>
+            </TeamNameWrapper>
+            <h3>{homeTeamScore || '0'}</h3>
           </TeamWrapper>
       </ScoreCardWrapper>
   );

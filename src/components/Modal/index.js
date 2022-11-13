@@ -154,26 +154,26 @@ const Modal = ({teamClicked, setTeamClicked, teamId}) => {
         (
           <>
           <ModalItemGroup topRow={true}>
-            <ModalItemTitle topRow={true} abbv={teamData.abbreviation}>
-              {teamData.full_name}
+            <ModalItemTitle topRow={true} abbv={teamData?.abbreviation}>
+              {teamData?.full_name || 'NULL'}
             </ModalItemTitle>
             <ModalItemData>ID #{teamId}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>City:</ModalItemTitle>
-            <ModalItemData>{teamData.city}</ModalItemData>
+            <ModalItemData>{teamData?.city || 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Abbreviation:</ModalItemTitle>
-            <ModalItemData>{teamData.abbreviation}</ModalItemData>
+            <ModalItemData>{teamData?.abbreviation || 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Conference:</ModalItemTitle>
-            <ModalItemData>{teamData.conference}ern</ModalItemData>
+            <ModalItemData>{teamData?.conference ? `${teamData?.conference}ern` : 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Division:</ModalItemTitle>
-            <ModalItemData>{teamData.division}</ModalItemData>
+            <ModalItemData>{teamData?.division || 'NULL'}</ModalItemData>
           </ModalItemGroup>
           </>
         )

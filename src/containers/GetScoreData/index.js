@@ -7,6 +7,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import Modal from '../../components/Modal';
 import { useDebounce } from '../../utilities/useDebounce';
+import { teamLogos } from '../../utilities/teamLogos';
 
 const GetScoreData = ({
   todaysDate,
@@ -94,13 +95,13 @@ const GetScoreData = ({
           return (
             <ScoreCard 
               key={score.id}
-
-              homeTeamAbbreviation={score?.home_team?.abbreviation}
+              
+              homeTeamLogo={teamLogos[0][score?.home_team?.abbreviation]}
               homeTeamName={score?.home_team?.name}
               homeTeamScore={score?.home_team_score}
               homeTeamId={score?.home_team?.id}
               
-              visitorTeamAbbreviation={score?.visitor_team?.abbreviation}
+              visitorTeamLogo={teamLogos[0][score?.visitor_team?.abbreviation]}
               visitorTeamName={score?.visitor_team?.name}
               visitorTeamScore={score?.visitor_team_score}
               visitorTeamId={score?.visitor_team?.id}
@@ -110,7 +111,6 @@ const GetScoreData = ({
 
               teamClicked={teamClicked}
               setTeamClicked={setTeamClicked}
-              teamId={teamId}
               setTeamId={setTeamId}
             >
             </ScoreCard>

@@ -13,7 +13,7 @@ const HomeTitle = styled.h1`
 
 const CardsContainer = styled.main`
   width: 100%;
-  min-height: 100vh;
+  min-height: 50vh;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

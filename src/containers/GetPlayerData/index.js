@@ -75,7 +75,7 @@ const GetPlayerData = ({filterSearch}) => {
 
   useEffect(() => {
     const waitForReturnedData = async () => {
-      const returnedPlayersData = await httpRequest('get', `${GET_PLAYERS_DATA_API}${filterSearch}`, {});
+      const returnedPlayersData = await httpRequest('get', `${GET_PLAYERS_DATA_API}${debounceSearchValue}`, {});
       setPlayersData(sortTable(returnedPlayersData.data));
       returnedPlayersData.error && console.log(returnedPlayersData?.error?.status);
     }
@@ -83,6 +83,11 @@ const GetPlayerData = ({filterSearch}) => {
     waitForReturnedData();
 
   }, [tableSortStatus, debounceSearchValue]);
+  // }, [debounceSearchValue]);
+
+  // useEffect(() => {
+  //   setPlayersData(sortTable(playersData));
+  // }, [tableSortStatus]);
 
   const displayPlayerData = (player) => {
     console.log(player);
