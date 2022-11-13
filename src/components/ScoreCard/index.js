@@ -110,7 +110,7 @@ const ScoreCard = ({
         }
           <TeamWrapper winner={visitorTeamScore > homeTeamScore ? true : false} onClick={() => loadModal(visitorTeamId)}>
             <TeamNameWrapper>
-              <TeamLogoImg src={visitorTeamLogo} />
+              <TeamLogoImg src={visitorTeamLogo} alt="Team logo" />
               <h3>{visitorTeamName || 'NULL'}</h3>
             </TeamNameWrapper>
             <h3>{visitorTeamScore || '0'}</h3>
