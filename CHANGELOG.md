@@ -1,5 +1,13 @@
 # NBA Score App Changelog
 
+## v1.0.6-dev (11/14/2022)
+
+### Changes
+
+- Remove unnecessary API calls
+
+---
+
 ## v1.0.5-dev (11/13/2022)
 
 ### Additions
@@ -7,7 +15,6 @@
 - Add team logo images
 
 ---
-
 
 ## v1.0.4-dev (11/12/2022)
 
