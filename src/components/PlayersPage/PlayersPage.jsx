@@ -10,6 +10,9 @@ const PlayersPageWrapper = styled.div`
   padding: 120px 50px 50px;
   background: ${customStyles.medium_shade_01};
   color: ${customStyles.light_shade_01};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const PlayersPageTitle = styled.h1`

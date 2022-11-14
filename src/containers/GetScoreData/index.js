@@ -12,14 +12,12 @@ import { teamLogos } from '../../utilities/teamLogos';
 const GetScoreData = ({
   todaysDate,
   filterSearch,
-  setFilterSearch,
 }) => {
 
   const [scoreData, setScoreData] = useState([]);
   const [scoreDataError, setScoreDataError] = useState('');
   const [teamClicked, setTeamClicked] = useState(false);
   const [teamId, setTeamId] = useState('1');
-  // const [isSearching, setIsSearching] = useState(false);
   const debounceSearchValue = useDebounce(filterSearch, 700);
 
   const sortGames = (data) => {
@@ -33,37 +31,19 @@ const GetScoreData = ({
       const aPeriod = Number(a.period);
       const bPeriod = Number(b.period);
 
-      if(aPeriod < bPeriod){
-        return 1;
-      }
-      else if ( aPeriod > bPeriod ) {
-        return -1;
-      }
-      else if ( aHour < bHour ) {
-        return -1;
-      }
-      else if ( aHour > bHour ) {
-        return 1;
-      }
-      else if ( aMinute < bMinute ) {
-        return -1;
-      }
-      else if ( bMinute > aMinute ) {
-        return 1;
-      }
-      return 0;
+      if(aPeriod < bPeriod) return 1;
+      else if ( aPeriod > bPeriod ) return -1;
+      else if ( aHour < bHour ) return -1;
+      else if ( aHour > bHour ) return 1;
+      else if ( aMinute < bMinute ) return -1;
+      else if ( bMinute > aMinute ) return 1;
+      else return 0;
     });
   };
 
   useEffect(() => {
 
     const waitForReturnedData = async () => {
-      // if ( debounceSearchValue ) {
-      //   setIsSearching(true);
-      // }
-      // else {
-      //   setIsSearching(false)
-      // }
       const returnedGameData = await httpRequest('get', GET_GAME_DATA_API, {
         dates: [
           todaysDate,
@@ -78,6 +58,7 @@ const GetScoreData = ({
           score?.home_team?.name.toLowerCase().includes(debounceSearchValue.toLowerCase())
         );
       }));
+      
       returnedGameData.error && setScoreDataError(returnedGameData?.error?.status);
       (!returnedGameData.error && scoreData.length < 1) && setScoreDataError('404');
     }
@@ -85,13 +66,46 @@ const GetScoreData = ({
     waitForReturnedData();
   }, [debounceSearchValue, todaysDate, scoreData.length]);
 
+  const [teamData, setTeamData] = useState([]);
+  const [isFetchingData, setisFetchingData] = useState(false);
+
+  useEffect(() => {
+
+      setisFetchingData(true);
+
+      const mountTeamData = () => {
+        if(scoreData.find(score => score.home_team.id === teamId)){
+          setTeamData(scoreData.find(score => score.home_team.id === teamId).home_team);
+          setisFetchingData(false);
+        } 
+        else if(scoreData.find(score => score.visitor_team.id === teamId)){
+          setTeamData(scoreData.find(score => score.visitor_team.id === teamId).visitor_team);
+          setisFetchingData(false);
+        }
+      };
+
+      setTimeout(mountTeamData, 500);
+
+      return () => {
+        clearTimeout(mountTeamData);
+      };
+
+  }, [teamId]);
+
   return (
     <>
-    <Modal teamClicked={teamClicked} setTeamClicked={setTeamClicked} teamId={teamId}/>
+    <Modal 
+      itemClicked={teamClicked} 
+      setItemClicked={setTeamClicked} 
+      dataId={teamId} 
+      data={teamData} 
+      isFetchingData={isFetchingData}
+      forTeam={true}
+    />
     {
       scoreData?.length > 0 
       ?
-        scoreData.map((score, i) => {
+        scoreData.map((score) => {
           return (
             <ScoreCard 
               key={score.id}

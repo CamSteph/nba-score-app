@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
-import { GET_TEAM_DATA_API } from '../../utilities/apiUrls';
-import { httpRequest } from '../../utilities/httpRequests';
 import { teamColors } from '../../utilities/teamColors';
 import SkeletonLoader from '../SkeletonLoader';
 
@@ -15,7 +13,7 @@ const ModalContainer = styled.div`
   background: rgba(0, 0, 0, .3);
   display: grid;
   place-items: center;
-  z-index: ${props => props.teamClicked ? '5' : '-5'};
+  z-index: ${props => props.itemClicked ? '5' : '-5'};
 `;
 
 const ModalContentWrapper = styled.div`
@@ -28,7 +26,7 @@ const ModalContentWrapper = styled.div`
   min-height: 400px;
   height: auto;
   max-height: 500px;
-  z-index: ${props => props.teamClicked ? '5' : '-5'};
+  z-index: ${props => props.itemClicked ? '5' : '-5'};
   transition: all .5s ease;
   display: flex;
   flex-direction: column;
@@ -73,36 +71,32 @@ const CloseModalBtn = styled.button`
   cursor: pointer;
 `;
 
-const Modal = ({teamClicked, setTeamClicked, teamId}) => {
-
-  const [teamData, setTeamData] = useState([]);
-  const [isFetchingData, setisFetchingData] = useState(false);
-
-  useEffect(() => {
-
-    const waitForReturnedData = async () => {
-      const returnedTeamData = await httpRequest('get', `${GET_TEAM_DATA_API}${teamId}`, {});
-      setTeamData(returnedTeamData.data);
-      returnedTeamData.error && console.log(returnedTeamData?.error);
-      setisFetchingData(false);
-    }
-
-    if(teamId) {
-      setisFetchingData(true);
-      setTimeout(() => {
-        waitForReturnedData();
-      }, 600);
-    }
-
-  }, [teamId]);
+const Modal = ({
+  itemClicked, 
+  setItemClicked, 
+  dataId,
+  data,
+  isFetchingData,
+  forTeam,
+}) => {
 
   const closeModal = () => {
-    setTeamClicked(!teamClicked);
+    setItemClicked(!itemClicked);
   };
 
+  const convertHeight = (feet, inches) => {
+    if (!feet) return null;
+    return `${feet}' ${inches}"`;
+  };
+
+  const convertWeight = (weight) => {
+    if (!weight) return null;
+    return `${weight} lbs`;
+  }
+
   return (
-    <ModalContainer teamClicked={teamClicked}>
-      <ModalContentWrapper teamClicked={teamClicked}>
+    <ModalContainer itemClicked={itemClicked}>
+      <ModalContentWrapper itemClicked={itemClicked}>
         {
           isFetchingData
           ?
@@ -151,29 +145,58 @@ const Modal = ({teamClicked, setTeamClicked, teamId}) => {
           </>
           )
         :
+          forTeam 
+        ?
         (
           <>
           <ModalItemGroup topRow={true}>
-            <ModalItemTitle topRow={true} abbv={teamData?.abbreviation}>
-              {teamData?.full_name || 'NULL'}
+            <ModalItemTitle topRow={true} abbv={data?.abbreviation}>
+              {data?.full_name || 'NULL'}
             </ModalItemTitle>
-            <ModalItemData>ID #{teamId}</ModalItemData>
+            <ModalItemData>ID #{dataId}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>City:</ModalItemTitle>
-            <ModalItemData>{teamData?.city || 'NULL'}</ModalItemData>
+            <ModalItemData>{data?.city || 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Abbreviation:</ModalItemTitle>
-            <ModalItemData>{teamData?.abbreviation || 'NULL'}</ModalItemData>
+            <ModalItemData>{data?.abbreviation || 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Conference:</ModalItemTitle>
-            <ModalItemData>{teamData?.conference ? `${teamData?.conference}ern` : 'NULL'}</ModalItemData>
+            <ModalItemData>{data?.conference ? `${data?.conference}ern` : 'NULL'}</ModalItemData>
           </ModalItemGroup>
           <ModalItemGroup>
             <ModalItemTitle>Division:</ModalItemTitle>
-            <ModalItemData>{teamData?.division || 'NULL'}</ModalItemData>
+            <ModalItemData>{data?.division || 'NULL'}</ModalItemData>
+          </ModalItemGroup>
+          </>
+        )
+        :
+        (
+          <>
+          <ModalItemGroup topRow={true}>
+            <ModalItemTitle topRow={true} abbv={null}>
+              {data?.first_name}  {data?.last_name}
+            </ModalItemTitle>
+            <ModalItemData>ID: #{data?.id || '0'}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Position:</ModalItemTitle>
+            <ModalItemData>{data?.position || 'NULL'}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Height:</ModalItemTitle>
+            <ModalItemData>{convertHeight(data?.height_feet, data?.height_inches) || 'NULL'}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Weight:</ModalItemTitle>
+            <ModalItemData>{convertWeight(data?.weight_pounds) || 'NULL'}</ModalItemData>
+          </ModalItemGroup>
+          <ModalItemGroup>
+            <ModalItemTitle>Team:</ModalItemTitle>
+            <ModalItemData>{data?.team?.full_name || 'NULL' }</ModalItemData>
           </ModalItemGroup>
           </>
         )

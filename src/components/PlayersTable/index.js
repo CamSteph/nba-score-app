@@ -4,7 +4,7 @@ import { customStyles } from '../../utilities/customStyles';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 
 const PlayerTableWrapper = styled.table`
-  width: 100%;
+  width: 90%;
   background: rgba(255, 225, 225, 0.10);
   border: none;
   outline: none;
@@ -82,21 +82,22 @@ const TableBody = styled.tbody`
   }
 `;
 
-const PlayerDataWrapper = styled.div`
-  width: 100%;
-  height: 200px;
-`;
-
 const PlayerTable = ({
   playersData, 
-  displayPlayerData,
   tableSortStatus,
   setTableSortStatus,
+  setPlayerClicked,
+  setPlayerId
 }) => {
 
   const setFilter = (newStatus) => {
     setTableSortStatus(newStatus)
   };
+
+  const displayPlayerData = (id) => {
+    setPlayerId(id);
+    setPlayerClicked(true);
+  }
 
   return (
     <PlayerTableWrapper expand>
@@ -136,15 +137,12 @@ const PlayerTable = ({
       &&
       playersData.map((player, i) => {
         return (
-          <TableBody key={i} onClick={() => displayPlayerData(player)}>
+          <TableBody key={i} onClick={() => displayPlayerData(player.id)}>
             <TableRow>
               <TableData>{player.id}</TableData>
               <TableData>{player.first_name}</TableData>
               <TableData>{player.last_name}</TableData>
             </TableRow>
-            {/* <PlayerDataWrapper>
-              THIS IS THE DATA
-            </PlayerDataWrapper> */}
           </TableBody>
         )
       })
