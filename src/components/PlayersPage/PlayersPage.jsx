@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
 import GetPlayerData from '../../containers/GetPlayerData';
 import FilterBar from '../../containers/FilterBar';
+import { useEffect } from 'react';
 
 const PlayersPageWrapper = styled.div`
   width: 100%;
@@ -26,6 +27,11 @@ const PlayersPageTitle = styled.h1`
 `;
 
 const PlayersPage = () => {
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   const setSearch = () => {
     return sessionStorage.getItem('team-search') || '';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
 
 const ScoreCardWrapper = styled.div`
-  width: 300px;
+  width: clamp(150px, 100%, 275px);
   height: 180px;
   border-radius: 8px;
   background-color: rgba(255, 225, 225, 0.10);
@@ -13,11 +13,6 @@ const ScoreCardWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
-  transition: background-color .5s ease;
-
-  :hover{
-    background-color: rgba(255, 225, 225, 0.25);
-  }
 `;
 
 const TeamWrapper = styled.div`

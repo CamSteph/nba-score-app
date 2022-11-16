@@ -108,8 +108,8 @@ const Header = () => {
       <NavWrapper>
         <LinkWrapper>
         <li><Link to='/'>Home</Link></li>
+        <li><Link to='/scores'>Scores</Link></li>
         <li><Link to='/players'>Players</Link></li>
-        <li><Link to='/more'>More</Link></li>
         </LinkWrapper>
       </NavWrapper>
     </HeaderWrapper>

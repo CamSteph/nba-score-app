@@ -15,9 +15,10 @@ import axios from "axios";
 
 export const httpRequest = async (method, url, configs = {}) => {
 
-  if(!url) return [];
+  if (!url) return [];
 
   try {
+
     const response = await axios({
       method,
       url,

@@ -4,17 +4,7 @@ import { customStyles } from '../../utilities/customStyles';
 import FooterSection from './Section';
 import { footerData } from '../../utilities/footerData';
 
-const FooterWrapper = styled.footer`
-  width: 100%;
-  height: 300px;
-  background: ${customStyles.dark_shade_01};
-  color: ${customStyles.light_shade_01};
-  display: grid;
-  grid-template-columns: repeat(${footerData.length}, 1fr);
-  padding: 40px 0;
-`;
-
-const ExtendedFooterSection = styled.div`
+const TopFooterSection = styled.div`
   width: 100%;
   height: 25px;
   padding: 30px 0 120px 0;
@@ -30,11 +20,27 @@ const ExtendedFooterSection = styled.div`
   }
 `;
 
+const FooterLinkWrapper = styled.footer`
+  width: 100%;
+  min-height: 300px;
+  background: ${customStyles.dark_shade_01};
+  color: ${customStyles.light_shade_01};
+  display: grid;
+  grid-template-columns: repeat(${footerData.length}, 1fr);
+  padding: 40px 0;
+
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(${Math.floor(footerData.length / footerData.length)}, 1fr);
+    grid-gap: 35px;
+    padding-top: 80px;
+  }
+`;
+
 const Footer = () => {
   return (
     <>
-    <ExtendedFooterSection>Learn more about <span>us</span>.<br/>We're <span>committed</span> to the game.</ExtendedFooterSection>
-    <FooterWrapper>
+    <TopFooterSection>Learn more about <span>us</span>.<br/>We're <span>committed</span> to the game.</TopFooterSection>
+    <FooterLinkWrapper>
       {
         footerData
       &&
@@ -48,7 +54,7 @@ const Footer = () => {
           )
         })
       }
-    </FooterWrapper>
+    </FooterLinkWrapper>
     </>
   );
 };

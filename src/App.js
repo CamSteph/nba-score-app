@@ -1,9 +1,10 @@
 import Header from "./components/Header/Header";
 import GlobalStyle from "./utilities/globalStyles";
 import { Routes, Route } from 'react-router-dom';
-import HomePage from "./components/HomePage/HomePage";
+import LandingPage from "./components/LandingPage";
+import ScorePage from "./components/ScorePage/ScorePage";
 import PlayersPage from "./components/PlayersPage/PlayersPage";
-import MorePage from "./components/MorePage/MorePage";
+import StatsPage from "./components/StatsPage/StatsPage";
 import Footer from "./components/Footer";
 
 
@@ -14,9 +15,12 @@ function App() {
         <Header/>
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/scores" element={<ScorePage />} />
           <Route path="/players" element={<PlayersPage />} />
-          <Route path="/more" element={<MorePage />} />
+          <Route path="/stats" element={<StatsPage />} >
+          <Route path="/stats:pId" element={<StatsPage />} />
+          </Route>
         </Routes>
         <Footer />
     </div>

@@ -61,6 +61,7 @@ const HomePage = () => {
           sessionStorage.setItem('curr-date', updatedDate);
         },
         clearSearch: null,
+        title: "Date: MM-DD-YYYY"
       },
       {
         label: "Filter by team",
@@ -79,7 +80,7 @@ const HomePage = () => {
 
   return (
     <HomePageWrapper>
-      <HomeTitle>Today's Games</HomeTitle>
+      <HomeTitle>Today's Games:</HomeTitle>
       <FilterBar 
         filterInputsData={filterInputsData}
       />

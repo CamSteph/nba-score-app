@@ -50,8 +50,8 @@ const GetPlayerData = ({filterSearch}) => {
           });
         case 'last-name-down':
           return data.sort((a, b) => {
-            if ( a.last_nam < b.last_name ) return 1;
-            else if ( a.last_nam > b.last_name ) return -1;
+            if ( a.last_name < b.last_name ) return 1;
+            else if ( a.last_name > b.last_name ) return -1;
             return 0;
           });
       default:
@@ -94,7 +94,7 @@ const GetPlayerData = ({filterSearch}) => {
 
         setIsFetchingData(false);
       }
-      
+
     };
 
     setTimeout(mountPlayerData, 500);

@@ -1,8 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
 import { teamColors } from '../../utilities/teamColors';
 import SkeletonLoader from '../SkeletonLoader';
+import { BsBoxArrowUpRight } from 'react-icons/bs';
 
 const ModalContainer = styled.div`
   width: 100%;
@@ -33,6 +35,10 @@ const ModalContentWrapper = styled.div`
   align-items: flex-start;
   justify-content: space-evenly;
   position: relative;
+
+  a{
+    width: 100%;
+  }
 `;
 
 const ModalItemGroup = styled.div`
@@ -58,17 +64,18 @@ const ModalItemData = styled.span`
   font-size: ${customStyles.medium_font_size}px;
 `;
 
-const CloseModalBtn = styled.button`
+const ModalBtn = styled.button`
   outline: none;
-  border: none;
+  border: ${props => props.inverted ? '1px solid #fff' : 'none'};
   padding: 15px 20px;
   width: 100%;
   border-radius: 6px;
   font-weight: 900;
   text-transform: uppercase;
-  background-color: ${customStyles.light_shade_01};
-  color: ${customStyles.dark_shade_01};
+  background-color: ${props => props.inverted ? 'transparent' : customStyles.light_shade_01};
+  color: ${props => props.inverted ? customStyles.light_shade_01 : customStyles.dark_shade_01};
   cursor: pointer;
+  margin-top: 20px;
 `;
 
 const Modal = ({
@@ -142,6 +149,7 @@ const Modal = ({
                 <SkeletonLoader loaderLength='long' />
                 </ModalItemData>
             </ModalItemGroup>
+            <ModalBtn onClick={closeModal}>Close</ModalBtn>
           </>
           )
         :
@@ -171,6 +179,7 @@ const Modal = ({
             <ModalItemTitle>Division:</ModalItemTitle>
             <ModalItemData>{data?.division || 'NULL'}</ModalItemData>
           </ModalItemGroup>
+          <ModalBtn onClick={closeModal}>Close</ModalBtn>
           </>
         )
         :
@@ -198,10 +207,11 @@ const Modal = ({
             <ModalItemTitle>Team:</ModalItemTitle>
             <ModalItemData>{data?.team?.full_name || 'NULL' }</ModalItemData>
           </ModalItemGroup>
+          <Link to={`/stats?pId=${dataId}&fn=${data.first_name}_${data.last_name}`}> <ModalBtn inverted={true} onClick={closeModal}>View Stats <BsBoxArrowUpRight /></ModalBtn></Link>
+          <ModalBtn onClick={closeModal}>Close</ModalBtn>
           </>
         )
         }
-        <CloseModalBtn onClick={closeModal}>Close</CloseModalBtn>
       </ModalContentWrapper>
     </ModalContainer>
   );

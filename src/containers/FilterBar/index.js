@@ -28,6 +28,7 @@ const FilterBarWrapper = styled.section`
 const InputElement = styled.input`
   outline: none;
   border: none;
+  min-width: 165px;
   padding: 10px;
   border-radius: 6px;
   font-size: ${customStyles.default_font_size}px;
@@ -103,6 +104,10 @@ const FilterBar = ({
                   value={inputData?.value}
                   placeholder={inputData?.placeholder}
                   onChange={inputData?.onChange} 
+                  min={inputData?.min}
+                  max={inputData?.max}
+                  title={inputData?.title}
+                  // aria-label="HELLO WORLD."
                 />
               )
           }
