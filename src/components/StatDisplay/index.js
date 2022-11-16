@@ -139,7 +139,7 @@ const StatDisplay = ({data, playerName}) => {
           <span>SPG</span>
           {data.stl}
         </StatCard>
-        <StatCard title="Steals per game">
+        <StatCard title="Blocks per game">
           <span>BPG</span>
           {data.blk}
         </StatCard>

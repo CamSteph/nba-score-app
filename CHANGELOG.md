@@ -1,5 +1,33 @@
 # NBA Score App Changelog
 
+## v1.0.7-dev (11/16/2022)
+
+### Additions
+
+- Add view stats button on players modal
+
+- Implement graph for displaying player stats
+
+- Add back button for stats page
+
+- Add landing page
+
+- Add scores link for score page
+
+### Changes
+
+- Implement GET query parameters for /stats page
+
+- Modify modal button on players page
+
+- Change date inpute to number for players page
+
+### Removals
+
+- Remove text search option for filter bar on players page
+
+---
+
 ## v1.0.6-dev (11/14/2022)
 
 ### Changes

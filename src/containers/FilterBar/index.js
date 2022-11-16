@@ -32,6 +32,7 @@ const InputElement = styled.input`
   padding: 10px;
   border-radius: 6px;
   font-size: ${customStyles.default_font_size}px;
+  background: rgba(225, 225, 225, 1);
 `;
 
 const LabelElement = styled.label`
@@ -86,7 +87,7 @@ const FilterBar = ({
             inputData?.type === 'text' ?
               (
                 <InputSearchWrapper>
-                <FaSearch />
+                <FaSearch  style={{"opacity":".5"}} />
                 <InputElement 
                   type={inputData?.type} 
                   name={inputData?.name}
