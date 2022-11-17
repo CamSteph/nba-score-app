@@ -1,5 +1,15 @@
 # NBA Score App Changelog
 
+## v1.0.8-dev (11/17/2022)
+
+### Changes
+
+- Update scroll bar styling
+
+- Update structure of landing page
+
+---
+
 ## v1.0.7-dev (11/16/2022)
 
 ### Additions
