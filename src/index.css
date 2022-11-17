@@ -10,3 +10,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   cursor: default;
 }
+
+*::-webkit-scrollbar {
+  width: 12px;
+  background: hsl(240, 55%, 5%);
+}
+
+*::-webkit-scrollbar-track {
+  background: hsl(240, 55%, 5%);
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(240, 31%, 38%);
+  border-radius: 20px;
+  cursor: pointer;
+}
