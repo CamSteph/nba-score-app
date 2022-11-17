@@ -78,9 +78,15 @@ const HomePage = () => {
       },
   ];
 
+  const areDatesEqual = () => {
+    return sessionStorage.getItem('curr-date') === formatDate();
+  };
+
   return (
     <HomePageWrapper>
-      <HomeTitle>Today's Games:</HomeTitle>
+      <HomeTitle>
+        {areDatesEqual() ? `Today's Games:` : `Games for ${todaysDate}`}     
+      </HomeTitle>
       <FilterBar 
         filterInputsData={filterInputsData}
       />
