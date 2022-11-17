@@ -1,5 +1,13 @@
 # NBA Score App Changelog
 
+## v1.0.9-dev (11/17/2022)
+
+### Changes
+
+- Update scores title depending on date
+
+---
+
 ## v1.0.8-dev (11/17/2022)
 
 ### Changes
