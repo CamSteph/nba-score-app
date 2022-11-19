@@ -1,5 +1,15 @@
 # NBA Score App Changelog
 
+## v1.0.9-dev (11/19/2022)
+
+### Changes
+
+- Include multiple seasons in player graph
+
+- Sort seasons in player graph from earliest from latest
+
+---
+
 ## v1.0.9-dev (11/17/2022)
 
 ### Changes
