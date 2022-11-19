@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import { customStyles } from '../../utilities/customStyles';
-import { FaCircle } from 'react-icons/fa';
 
 const GraphWrapper = styled.div`
   display: inline-block;
@@ -12,58 +11,39 @@ const GraphWrapper = styled.div`
 `;
 
 const Graph = ({playerData}) => {
-  const labels = [playerData.season];
+  const labels = [playerData.season, '2019', '2017', '1800'].sort((a, b) => a - b, 0);
   const data = {
     labels: labels,
     datasets: [
       {
-        label: "Points per game",
+        label: `Season AVG for ${playerData.season}`,
         backgroundColor: customStyles.medium_shade_01,
         hoverBackgroundColor: customStyles.accent_shade_02,
-        borderColor: customStyles.accent_shade_02,
-        borderWidth: 2,
         borderRadius: 6,
-        data: [playerData.pts],
+        data: [playerData.pts, 19, 23, 35],
       },
       {
         label: "Assists per game",
-        backgroundColor: customStyles.medium_shade_01,
+        backgroundColor: customStyles.medium_shade_02,
         hoverBackgroundColor: customStyles.accent_shade_02,
-        borderColor: customStyles.accent_shade_02,
-        borderWidth: 2,
         borderRadius: 6,
-        data: [playerData.ast],
+        data: [playerData.ast, 5, 6, 8],
       },
       {
         label: "Rebounds per game",
-        backgroundColor: customStyles.medium_shade_01,
+        backgroundColor: customStyles.light_shade_01,
         hoverBackgroundColor: customStyles.accent_shade_02,
-        borderColor: customStyles.accent_shade_02,
-        borderWidth: 2,
         borderRadius: 6,
-        data: [Number(playerData.oreb) + Number(playerData.dreb)],
+        data: [Number(playerData.oreb) + Number(playerData.dreb), 7, 9, 11],
       },
     ],
     options: {
-      // scales: {
-      //   y: {
-      //     beginAtZero: true
-      //   }
-      // },
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      layout: {
-        padding: 200
-      }
     }
   };
+
   return (
     <GraphWrapper>
-      <Bar data={data} />
-      {/* Points */}
+        <Bar data={data} />
     </GraphWrapper>
   );
 };
