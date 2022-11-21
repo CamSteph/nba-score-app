@@ -5,6 +5,7 @@ import GetStatData from '../../containers/getStatData';
 import { customStyles } from '../../utilities/customStyles';
 import { formatDate } from '../../utilities/formatDate';
 import { useLocation, useNavigate } from 'react-router-dom';
+import YearSelection from '../YearSelection';
 
 const StatsPageWrapper = styled.div`
   width: 100%;
@@ -55,8 +56,7 @@ const TitleWrapper = styled.div`
 
 const getYearFromDate = (date) => {
   if (!date) return;
-  let yearFromDate =  date;
-  yearFromDate =  yearFromDate.split('-')[0];
+  let yearFromDate =  date.split('-')[0];
   sessionStorage.setItem('curr-year', yearFromDate);
   return yearFromDate;
 }
@@ -74,45 +74,27 @@ const StatsPage = () => {
   const location = useLocation();
   const pId = location.search.slice(1).split('&')[0].split('=')[1];
   const playerName = location.search.slice(1).split('&')[1].split('=')[1].replace('_', ' ');
-  // const getPidRegex = /pId\=\d+/g;
-  // const getPidValueRegex = /\d+/g;
-  // const pId = getPidValueRegex.exec(getPidRegex.exec(location.search))[0];
-
 
   const [selectedYear, setSelectedYear] = useState(setDate());
-  const [filterSearch, setFilterSearch] = useState(setSearch());
 
-  const filterInputsData = [
-    {
-        label: "Filter by year",
-        type: "number",
-        name: "year-filter",
-        value: selectedYear,
-        placeholder: "Search by year",
-        min: "1950",
-        max: "2030",
-        onChange:  (e) => {
-          const updatedYear = e.target.value;
-          setSelectedYear(updatedYear);
-          sessionStorage.setItem('curr-year', updatedYear);
-        },
-        clearSearch: null,
-        title: "Min year: 1950\nMax year: 2022"
-      },
-  ];
+  const [allSelectedYears, setAllSelectedYears] = useState([selectedYear]);
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  console.log(allSelectedYears);
 
   const navigate = useNavigate();
 
   return (
     <StatsPageWrapper>
-      {/* <button onClick={() => navigate(-1)}>Go back</button> */}
       <StatePageTitle><button onClick={() => navigate(-1)}>Go back</button>Check out the <strong>player's</strong> stats!</StatePageTitle>
-      <FilterBar filterInputsData={filterInputsData} />
+      <YearSelection allSelectedYears={allSelectedYears} setAllSelectedYears={setAllSelectedYears} setIsRemoving={setIsRemoving}/>
       <GetStatData 
-        filterSearch={filterSearch} 
         selectedYear={selectedYear} 
         pId={pId} 
-        playerName={playerName} />
+        playerName={playerName} 
+        allSelectedYears={allSelectedYears}
+        isRemoving={isRemoving}
+      />
     </StatsPageWrapper>
   );
 

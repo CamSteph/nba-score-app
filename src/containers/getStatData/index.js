@@ -3,54 +3,85 @@ import { httpRequest } from '../../utilities/httpRequests';
 import { GET_SEASON_AVERAGES_DATA_API } from '../../utilities/apiUrls';
 import { useDebounce } from '../../utilities/useDebounce';
 import StatDisplay from '../../components/StatDisplay';
+import { customStyles } from '../../utilities/customStyles';
 
 const GetStatData = ({
-  filterSearch, 
   selectedYear,
   pId,
   playerName,
+  allSelectedYears,
+  isRemoving,
 }) => {
 
-  const [statData, setStatData] = useState({});
+  const [statData, setStatData] = useState([]);
   const [statDataError, setStatDataError] = useState('');
   const debounceSearchValue = useDebounce(selectedYear, 700);
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [playerId, setPlayerId] = useState(pId);
 
+  const firstSelectedYear = allSelectedYears[0];
+  const secondSelectedYear = allSelectedYears[1];
+  const thirdSelectedYear = allSelectedYears[2];
+
   useEffect(() => {
 
     setIsFetchingData(true);
 
-    const waitForReturnedData = async () => {
+    const waitForReturnedData = async (year) => {
 
       const returnedStatData = await httpRequest('get', `${GET_SEASON_AVERAGES_DATA_API}`, {
-        season: debounceSearchValue,
+        season: year,
         player_ids: [playerId]
       });
 
-      setStatData(returnedStatData.data[0]);
+      if(!isRemoving && statData.length < 3){
+        setStatData(prev => [...prev, returnedStatData.data[0]]);
+      }
+      else if ( isRemoving && statData.length > 0){
+        setStatData(prev => {
+          const next = [...prev];
+          next.pop();
+          return next;
+        });
+      }
 
       if (returnedStatData.error) {
-        console.log(returnedStatData?.error?.status);
+        console.error(returnedStatData?.error?.status);
         setStatDataError(returnedStatData?.error?.status);
       }
       else if (!returnedStatData.error && statData?.length === 0){
-        setStatData('404');
+        setStatDataError('404');
       }
 
       setIsFetchingData(false);
     };
 
-    waitForReturnedData();
+    switch (allSelectedYears.length) {
+      case 1:
+        waitForReturnedData(firstSelectedYear);
+        break;
+      case 2:
+        waitForReturnedData(secondSelectedYear);
+        break;
+      case 3:
+        waitForReturnedData(thirdSelectedYear);
+        break;
+      default:
+        waitForReturnedData(firstSelectedYear);
+    }
 
-  }, [debounceSearchValue, playerId, statData?.length]);
+  }, [playerId, firstSelectedYear, secondSelectedYear, thirdSelectedYear]);
+
+  useEffect(() => {
+    console.log('2nd UseEffect: ', statData);
+  }, [statData]);
 
   return (
     statData
     ?
     <StatDisplay data={statData} playerName={playerName} />
     :
-    (<h1>No stats found {playerName} this player for {debounceSearchValue} season</h1>)
+    (<h1>No stats found for <strong style={{"color":customStyles.accent_shade_03}}>{playerName}</strong> for {debounceSearchValue} season</h1>)
   )
 }
 

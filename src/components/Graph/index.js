@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { customStyles } from '../../utilities/customStyles';
 
 const GraphWrapper = styled.div`
   display: inline-block;
@@ -11,34 +10,40 @@ const GraphWrapper = styled.div`
 `;
 
 const Graph = ({playerData}) => {
-  const labels = [playerData.season, '2019', '2017', '1800'].sort((a, b) => a - b, 0);
+
+  const labels = playerData.map(entry => entry.season).sort((a, b) => a - b, 0);
+
   const data = {
     labels: labels,
     datasets: [
       {
-        label: `Season AVG for ${playerData.season}`,
-        backgroundColor: customStyles.medium_shade_01,
-        hoverBackgroundColor: customStyles.accent_shade_02,
+        label: `Pts per game`,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        hoverBackgroundColor: 'rgba(54, 162, 235, 1)',
+        borderColor: ['rgba(54, 162, 235, 1)'],
+        borderWidth: 2,
         borderRadius: 6,
-        data: [playerData.pts, 19, 23, 35],
+        data: playerData.sort((a, b) => Number(a.season) - Number(b.season), 0).map(d => d?.pts),
       },
       {
         label: "Assists per game",
-        backgroundColor: customStyles.medium_shade_02,
-        hoverBackgroundColor: customStyles.accent_shade_02,
+        backgroundColor: 'rgba(34, 112, 205, 0.5)',
+        hoverBackgroundColor: 'rgba(34, 112, 205, 1)',
+        borderColor: ['rgba(34, 112, 205, 1)'],
+        borderWidth: 2,
         borderRadius: 6,
-        data: [playerData.ast, 5, 6, 8],
+        data: playerData.sort((a, b) => Number(a.season) - Number(b.season), 0).map(d => d?.ast),
       },
       {
         label: "Rebounds per game",
-        backgroundColor: customStyles.light_shade_01,
-        hoverBackgroundColor: customStyles.accent_shade_02,
+        backgroundColor: 'rgba(10, 62, 165, 0.5)',
+        hoverBackgroundColor: 'rgba(40, 72, 165, 1)',
+        borderColor: ['rgba(40, 72, 165, 1)'],
+        borderWidth: 2,
         borderRadius: 6,
-        data: [Number(playerData.oreb) + Number(playerData.dreb), 7, 9, 11],
+        data: playerData.sort((a, b) => Number(a.season) - Number(b.season), 0).map(d => Number(d?.oreb) + Number(d?.dreb)),
       },
     ],
-    options: {
-    }
   };
 
   return (

@@ -93,7 +93,7 @@ const MoreDisplay = styled.div`
 
 const StatDisplay = ({data, playerName}) => {
 
-  console.log(data)
+  // console.log(data)
 
   const formatPercentage = (decimal) => {
     return (Number(decimal) * 100).toFixed(2);
@@ -107,60 +107,60 @@ const StatDisplay = ({data, playerName}) => {
         <span>Los Angeles Lakers</span>
       </NameDisplayCard>
       <IdDisplayCard>
-        <b>ID:</b> #{data.player_id}<br/><br/>
-        <b>Games played:</b> {data.games_played}
+        <b>ID:</b> #{data[0]?.player_id}<br/><br/>
+        <b>Games played:</b> {data[0]?.games_played}
         </IdDisplayCard>
       <StatGraphDisplay>
         <StatCard title="Points per game">
           <span>PPG</span>
-          {data.pts}
+          {data[0]?.pts}
         </StatCard>
         <StatCard title="Assits per game">
           <span>APG</span>
-          {data.ast}
+          {data[0]?.ast}
         </StatCard>
         <StatCard title="3pt percentage">
           <span>3P%</span>
-          {formatPercentage(data.fg3_pct)}
+          {formatPercentage(data[0]?.fg3_pct)}
         </StatCard>
         <StatCard title="Field goal percentage">
           <span>FG%</span>
-          {formatPercentage(data.fg_pct)}
+          {formatPercentage(data[0]?.fg_pct)}
         </StatCard>
         <StatCard title="Offensive rebounds per game">
           <span>ORPG</span>
-          {data.oreb}
+          {data[0]?.oreb}
         </StatCard>
         <StatCard title="Defensive rebounds per game">
           <span>DRPG</span>
-          {data.dreb}
+          {data[0]?.dreb}
         </StatCard>
         <StatCard title="Steals per game">
           <span>SPG</span>
-          {data.stl}
+          {data[0]?.stl}
         </StatCard>
         <StatCard title="Blocks per game">
           <span>BPG</span>
-          {data.blk}
+          {data[0]?.blk}
         </StatCard>
         <StatCard graph={true}>
           {/* <span>Graph goes here</span>
-          {data.blk} */}
+          {data[0]?.blk} */}
           <Graph playerData={data}/>
         </StatCard>
       </StatGraphDisplay>
       <MoreDisplay>
       <StatCard title="Minutess per game">
           <span>MPG</span>
-          {data.min}
+          {data[0]?.min}
         </StatCard>
       <StatCard title="Games played">
           <span>GP</span>
-          {data.games_played}
+          {data[0]?.games_played}
         </StatCard>
       <StatCard title="Turnovers per game">
           <span>TPG</span>
-          {data.turnover}
+          {data[0]?.turnover}
         </StatCard>
       </MoreDisplay>
     </StatDisplayWrapper>
