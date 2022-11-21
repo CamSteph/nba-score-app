@@ -1,5 +1,13 @@
 # NBA Score App Changelog
 
+## v1.1.0-dev (11/21/2022)
+
+### Changes
+
+- Allow multiple seasons to display on stat graph
+
+---
+
 ## v1.0.9-dev (11/19/2022)
 
 ### Changes
