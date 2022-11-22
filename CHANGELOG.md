@@ -2,6 +2,10 @@
 
 ## v1.1.0-dev (11/21/2022)
 
+### Additions
+
+- Style score page title depending on date
+
 ### Changes
 
 - Allow multiple seasons to display on stat graph
