@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
-import { FaBasketballBall } from 'react-icons/fa';
+import { FaBasketballBall, FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
@@ -17,6 +17,16 @@ const HeaderWrapper = styled.header`
   left: 0;
   z-index: 10;
   transition: all .5s ease;
+
+  li a{
+    color: ${customStyles.light_shade_01};
+    transition: color .5s ease;
+    font-weight: bold;
+  }
+
+  li a:hover{
+    color: ${customStyles.accent_shade_02};
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -31,10 +41,15 @@ const LogoWrapper = styled.div`
     justify-items: space-around;
     color: ${customStyles.light_shade_01};
   }
+
 `;
 
 const LogoText = styled.h2`
   margin-left: 10px;
+
+  @media ( max-width: 768px) {
+    display: none;
+  }
 `;
 
 const NavWrapper = styled.div`
@@ -44,6 +59,47 @@ const NavWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding-right: 20px;
+
+  .dropdown-wrapper{
+    display: none;
+    cursor: pointer;
+
+    span{
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content{
+      display: none;
+      position: absolute;
+      min-width: 160px;
+      top: 30px;
+      right: 15px;
+      padding: 20px;
+      z-index: 2;
+      background: ${customStyles.dark_shade_01};
+      border-radius: 6px;
+
+      ul {
+        height: 100%;
+        
+        li {
+          margin-bottom: 15px;
+          padding: 5px;
+          
+          &:hover{
+            background: ${customStyles.medium_shade_01};
+            border-radius: 6px;
+          }
+        }
+        
+      }
+    }
+  }
 `;
 
 const LinkWrapper = styled.ul`
@@ -52,21 +108,15 @@ const LinkWrapper = styled.ul`
   align-items: center;
   justify-content: space-around;
 
-  li a{
-    color: ${customStyles.light_shade_01};
-    transition: color .5s ease;
-    font-weight: bold;
-  }
-
-  li a:hover{
-    color: ${customStyles.accent_shade_02};
-  }
-
+  @media (max-width: 640px) {
+        display: none;
+      }
 `;
 
 const Header = () => {
 
   const [isHeaderShrunk, setIsHeaderShrunk] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -97,6 +147,10 @@ const Header = () => {
 
   }, []);
 
+  const handleMobileNavOpen = () => {
+    setIsMobileNavOpen(prev => !prev);
+  }
+
   return (
     <HeaderWrapper isShrunk={isHeaderShrunk}>
       <LogoWrapper>
@@ -111,6 +165,16 @@ const Header = () => {
         <li><Link to='/scores'>Scores</Link></li>
         <li><Link to='/players'>Players</Link></li>
         </LinkWrapper>
+        <div className="dropdown-wrapper">
+          <span onClick={handleMobileNavOpen}><FaBars /></span>
+          <div className="dropdown-content" style={{"display": isMobileNavOpen ? 'block' : 'none'}}>
+            <ul>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/scores'>Scores</Link></li>
+              <li><Link to='/players'>Players</Link></li>
+            </ul>
+          </div>
+        </div>
       </NavWrapper>
     </HeaderWrapper>
   );

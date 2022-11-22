@@ -17,11 +17,7 @@ const FilterBarWrapper = styled.section`
 
   @media (max-width: 490px) {
     flex-direction: column;
-    width: 75%;
 
-    :nth-child(2) {
-      /* display: none; */
-    }
   }
 `;
 

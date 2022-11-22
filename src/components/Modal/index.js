@@ -50,7 +50,7 @@ const ModalItemGroup = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const ModalItemTitle = styled.h3`
@@ -75,7 +75,7 @@ const ModalBtn = styled.button`
   background-color: ${props => props.inverted ? 'transparent' : customStyles.light_shade_01};
   color: ${props => props.inverted ? customStyles.light_shade_01 : customStyles.dark_shade_01};
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const Modal = ({

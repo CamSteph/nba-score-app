@@ -52,7 +52,7 @@ const CallToActionCard = styled.img`
   object-fit: contain;
   grid-column: ${props => `${props.startCol} / ${props.endCol}`};
   grid-row: ${props => `${props.startRow} / ${props.endRow}`};
-  width: 200%;
+  width: 90%;
   height: 65%;
   padding: 20px;
   padding-top: 0;
@@ -65,7 +65,7 @@ const LandingPage = () => {
     <LandingPageContainer>
       <LandingPageTitle>Welcome to the <strong>Player's</strong> League.</LandingPageTitle>
       <CardWrapper>
-        <CallToActionCard src={CallToActionImage} startCol={1} endCol={3} startRow={0} endRow={1} />
+        <CallToActionCard src={CallToActionImage} startCol={1} endCol={-1} startRow={0} endRow={1} />
         <Card startCol={1} endCol={4} startRow={3} endRow={3} bgColorVal='blue'>
           LEARN MORE
         </Card>

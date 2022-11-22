@@ -67,6 +67,11 @@ const StatCard = styled.div`
   padding-bottom: 10px;
   font-size: ${customStyles.medium_font_size}px;
   grid-column: ${props => props.graph ? '1/-1' : ''};
+
+  h4{
+    margin-top: 15%;
+    text-align: center;
+  }
   
   span{
     font-weight: bold;
@@ -96,7 +101,7 @@ const StatDisplay = ({data, playerName, lastSelectedYear}) => {
   const lastEntry = data.find(entry => entry.season.toString() === lastSelectedYear);
 
   const formatPercentage = (decimal) => {
-    if ( !decimal ) return 0.00;
+    if ( !decimal ) return `0.00`;
     return (Number(decimal) * 100).toFixed(2);
   }
 
@@ -105,20 +110,20 @@ const StatDisplay = ({data, playerName, lastSelectedYear}) => {
     <StatDisplayWrapper>
       <NameDisplayCard>
         <h2>{playerName || 'NULL'}</h2>
-        <span>Los Angeles Lakers</span>
+        <span title='Season'>{lastSelectedYear}</span>
       </NameDisplayCard>
       <IdDisplayCard>
-        <b>ID:</b> #{lastEntry?.player_id}<br/><br/>
-        <b>Games played:</b> {lastEntry?.games_played}
+        <b>ID:</b> #{lastEntry?.player_id || 0}<br/><br/>
+        <b>Games played:</b> {lastEntry?.games_played || 0}
         </IdDisplayCard>
       <StatGraphDisplay>
         <StatCard title="Points per game">
           <span>PPG</span>
-          {lastEntry?.pts}
+          {lastEntry?.pts || 0}
         </StatCard>
         <StatCard title="Assits per game">
           <span>APG</span>
-          {lastEntry?.ast}
+          {lastEntry?.ast || 0}
         </StatCard>
         <StatCard title="3pt percentage">
           <span>3P%</span>
@@ -130,36 +135,41 @@ const StatDisplay = ({data, playerName, lastSelectedYear}) => {
         </StatCard>
         <StatCard title="Offensive rebounds per game">
           <span>ORPG</span>
-          {lastEntry?.oreb}
+          {lastEntry?.oreb || 0}
         </StatCard>
         <StatCard title="Defensive rebounds per game">
           <span>DRPG</span>
-          {lastEntry?.dreb}
+          {lastEntry?.dreb || 0}
         </StatCard>
         <StatCard title="Steals per game">
           <span>SPG</span>
-          {lastEntry?.stl}
+          {lastEntry?.stl || 0}
         </StatCard>
         <StatCard title="Blocks per game">
           <span>BPG</span>
-          {lastEntry?.blk}
+          {lastEntry?.blk || 0}
         </StatCard>
         <StatCard graph={true}>
-          <Graph playerData={data}/>
+          {
+            data.length > 0 ?
+              (<Graph playerData={data}/>)
+            :
+              (<h4>No seasons selected.</h4>)
+          }
         </StatCard>
       </StatGraphDisplay>
       <MoreDisplay>
-      <StatCard title="Minutess per game">
-          <span>MPG</span>
-          {lastEntry?.min}
+        <StatCard title="Minutess per game">
+          <span>Minutes Per Game</span>
+          {lastEntry?.min || 0}
         </StatCard>
-      <StatCard title="Games played">
-          <span>GP</span>
-          {lastEntry?.games_played}
+        <StatCard title="Turnovers per game">
+          <span>Turnovers Per Game</span>
+          {lastEntry?.turnover || 0}
         </StatCard>
-      <StatCard title="Turnovers per game">
-          <span>TPG</span>
-          {lastEntry?.turnover}
+        <StatCard title="Games played">
+          <span>Games Played</span>
+          {lastEntry?.games_played || 0}
         </StatCard>
       </MoreDisplay>
     </StatDisplayWrapper>
