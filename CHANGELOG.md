@@ -6,6 +6,10 @@
 
 - Allow multiple seasons to display on stat graph
 
+### Bugfixes
+
+- Fix year selection and unselection behavior for stats page
+
 ---
 
 ## v1.0.9-dev (11/19/2022)
