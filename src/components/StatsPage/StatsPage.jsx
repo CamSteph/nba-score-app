@@ -78,22 +78,22 @@ const StatsPage = () => {
   const [selectedYear, setSelectedYear] = useState(setDate());
 
   const [allSelectedYears, setAllSelectedYears] = useState([selectedYear]);
+  const [yearToRemove, setYearToRemove] = useState('');
   const [isRemoving, setIsRemoving] = useState(false);
-
-  console.log(allSelectedYears);
 
   const navigate = useNavigate();
 
   return (
     <StatsPageWrapper>
       <StatePageTitle><button onClick={() => navigate(-1)}>Go back</button>Check out the <strong>player's</strong> stats!</StatePageTitle>
-      <YearSelection allSelectedYears={allSelectedYears} setAllSelectedYears={setAllSelectedYears} setIsRemoving={setIsRemoving}/>
+      <YearSelection allSelectedYears={allSelectedYears} setAllSelectedYears={setAllSelectedYears} setIsRemoving={setIsRemoving} setYearToRemove={setYearToRemove} />
       <GetStatData 
         selectedYear={selectedYear} 
         pId={pId} 
         playerName={playerName} 
         allSelectedYears={allSelectedYears}
         isRemoving={isRemoving}
+        yearToRemove={yearToRemove}
       />
     </StatsPageWrapper>
   );

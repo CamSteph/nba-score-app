@@ -23,6 +23,5 @@ body {
 
 *::-webkit-scrollbar-thumb {
   background: hsl(240, 31%, 38%);
-  border-radius: 20px;
   cursor: pointer;
 }

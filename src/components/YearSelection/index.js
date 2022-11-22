@@ -42,6 +42,7 @@ const YearSelection = ({
   allSelectedYears,
   setAllSelectedYears,
   setIsRemoving,
+  setYearToRemove,
 }) => {
 
   const calculateNumberOfYears = () => {
@@ -63,13 +64,17 @@ const YearSelection = ({
 
       if(allSelectedYears.length < 3 && !allSelectedYears.includes(year)) {
         setIsRemoving(false);
+        setYearToRemove('');
         setAllSelectedYears(prev => [...prev, year]);
         element.style.opacity = '1';
+        element.style.fontWeight = 'bold';
       }
       else if (allSelectedYears.includes(year)) {
         setIsRemoving(true);
+        setYearToRemove(year.toString());
         setAllSelectedYears(prev => prev.filter(val => val !== year));
         element.style.opacity = '.5';
+        element.style.fontWeight = 'normal';
       }
 
     };
@@ -80,7 +85,7 @@ const YearSelection = ({
         numberOfYears.map((entry, id) => (
           <YearWrapper 
             key={id} 
-            style={{opacity: entry.year.toString() === allSelectedYears[0] ? '1' : '.5'}} 
+            style={{opacity: entry.year.toString() === allSelectedYears[0] ? '1' : '.5', "fontWeight" : entry.year.toString() === allSelectedYears[0] ? 'bold' : 'normal'}} 
             onClick={e => toggleSelection(e)}
           >
             {entry.year}

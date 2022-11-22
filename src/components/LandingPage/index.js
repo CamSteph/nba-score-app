@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { customStyles } from '../../utilities/customStyles';
-import CallToActionImage from '../../media/images/nba_call_to_action.jpg';
+import CallToActionImage from '../../media/images/home_img.svg';
 
 const LandingPageContainer = styled.div`
   width: 100%;
@@ -22,13 +22,13 @@ const LandingPageTitle = styled.h1`
 const CardWrapper = styled.main`
   width: 85%;
   height: auto;
-  max-height: 140vh;
+  max-height: 170vh;
   min-height: 45vh;
   background: transparent;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-column-gap: 50px;
   margin: auto;
   place-items: center;
   /* padding-top: 80px; */
@@ -49,11 +49,12 @@ const Card = styled.div`
 `;
 
 const CallToActionCard = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   grid-column: ${props => `${props.startCol} / ${props.endCol}`};
   grid-row: ${props => `${props.startRow} / ${props.endRow}`};
-  width: 90%;
-  height: 75%;
+  width: 200%;
+  height: 65%;
+  padding: 20px;
   padding-top: 0;
   position: relative;
   border-radius: 6px;
@@ -64,7 +65,7 @@ const LandingPage = () => {
     <LandingPageContainer>
       <LandingPageTitle>Welcome to the <strong>Player's</strong> League.</LandingPageTitle>
       <CardWrapper>
-        <CallToActionCard src={CallToActionImage} startCol={1} endCol={-1} startRow={0} endRow={1} />
+        <CallToActionCard src={CallToActionImage} startCol={1} endCol={3} startRow={0} endRow={1} />
         <Card startCol={1} endCol={4} startRow={3} endRow={3} bgColorVal='blue'>
           LEARN MORE
         </Card>

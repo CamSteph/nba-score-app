@@ -91,11 +91,12 @@ const MoreDisplay = styled.div`
   grid-gap: 15px;
 `;
 
-const StatDisplay = ({data, playerName}) => {
+const StatDisplay = ({data, playerName, lastSelectedYear}) => {
 
-  // console.log(data)
+  const lastEntry = data.find(entry => entry.season.toString() === lastSelectedYear);
 
   const formatPercentage = (decimal) => {
+    if ( !decimal ) return 0.00;
     return (Number(decimal) * 100).toFixed(2);
   }
 
@@ -107,60 +108,58 @@ const StatDisplay = ({data, playerName}) => {
         <span>Los Angeles Lakers</span>
       </NameDisplayCard>
       <IdDisplayCard>
-        <b>ID:</b> #{data[0]?.player_id}<br/><br/>
-        <b>Games played:</b> {data[0]?.games_played}
+        <b>ID:</b> #{lastEntry?.player_id}<br/><br/>
+        <b>Games played:</b> {lastEntry?.games_played}
         </IdDisplayCard>
       <StatGraphDisplay>
         <StatCard title="Points per game">
           <span>PPG</span>
-          {data[0]?.pts}
+          {lastEntry?.pts}
         </StatCard>
         <StatCard title="Assits per game">
           <span>APG</span>
-          {data[0]?.ast}
+          {lastEntry?.ast}
         </StatCard>
         <StatCard title="3pt percentage">
           <span>3P%</span>
-          {formatPercentage(data[0]?.fg3_pct)}
+          {formatPercentage(lastEntry?.fg3_pct)}
         </StatCard>
         <StatCard title="Field goal percentage">
           <span>FG%</span>
-          {formatPercentage(data[0]?.fg_pct)}
+          {formatPercentage(lastEntry?.fg_pct)}
         </StatCard>
         <StatCard title="Offensive rebounds per game">
           <span>ORPG</span>
-          {data[0]?.oreb}
+          {lastEntry?.oreb}
         </StatCard>
         <StatCard title="Defensive rebounds per game">
           <span>DRPG</span>
-          {data[0]?.dreb}
+          {lastEntry?.dreb}
         </StatCard>
         <StatCard title="Steals per game">
           <span>SPG</span>
-          {data[0]?.stl}
+          {lastEntry?.stl}
         </StatCard>
         <StatCard title="Blocks per game">
           <span>BPG</span>
-          {data[0]?.blk}
+          {lastEntry?.blk}
         </StatCard>
         <StatCard graph={true}>
-          {/* <span>Graph goes here</span>
-          {data[0]?.blk} */}
           <Graph playerData={data}/>
         </StatCard>
       </StatGraphDisplay>
       <MoreDisplay>
       <StatCard title="Minutess per game">
           <span>MPG</span>
-          {data[0]?.min}
+          {lastEntry?.min}
         </StatCard>
       <StatCard title="Games played">
           <span>GP</span>
-          {data[0]?.games_played}
+          {lastEntry?.games_played}
         </StatCard>
       <StatCard title="Turnovers per game">
           <span>TPG</span>
-          {data[0]?.turnover}
+          {lastEntry?.turnover}
         </StatCard>
       </MoreDisplay>
     </StatDisplayWrapper>

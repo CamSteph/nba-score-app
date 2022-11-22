@@ -11,6 +11,7 @@ const GetStatData = ({
   playerName,
   allSelectedYears,
   isRemoving,
+  yearToRemove,
 }) => {
 
   const [statData, setStatData] = useState([]);
@@ -34,14 +35,29 @@ const GetStatData = ({
         player_ids: [playerId]
       });
 
-      if(!isRemoving && statData.length < 3){
+      if ( !isRemoving && statData.length <= 3 && returnedStatData.data[0] ) {
         setStatData(prev => [...prev, returnedStatData.data[0]]);
       }
-      else if ( isRemoving && statData.length > 0){
+      else if ( !isRemoving && statData.length <= 3 && !returnedStatData.data[0]) {
+        setStatData(prev => [...prev, {
+          season: year,
+          id: null,
+          pts: 0,
+          ast: 0,
+          oreb: 0,
+          dreb: 0,
+          fg3_pct: 0,
+          fg_pct: 0,
+          min: 0,
+          stl: 0,
+          blk: 0,
+          turnover: 0,
+          games_played: 0,
+        }]);
+      }
+      else if ( isRemoving && statData.length > 0) {
         setStatData(prev => {
-          const next = [...prev];
-          next.pop();
-          return next;
+          return [...prev].filter(entry => entry?.season.toString() != yearToRemove);
         });
       }
 
@@ -72,14 +88,10 @@ const GetStatData = ({
 
   }, [playerId, firstSelectedYear, secondSelectedYear, thirdSelectedYear]);
 
-  useEffect(() => {
-    console.log('2nd UseEffect: ', statData);
-  }, [statData]);
-
   return (
     statData
     ?
-    <StatDisplay data={statData} playerName={playerName} />
+    <StatDisplay data={statData} playerName={playerName} lastSelectedYear={allSelectedYears[allSelectedYears.length - 1]} />
     :
     (<h1>No stats found for <strong style={{"color":customStyles.accent_shade_03}}>{playerName}</strong> for {debounceSearchValue} season</h1>)
   )
