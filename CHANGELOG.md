@@ -6,6 +6,8 @@
 
 - Allow multiple seasons to display on stat graph
 
+- Make header responsive
+
 ### Bugfixes
 
 - Fix year selection and unselection behavior for stats page
