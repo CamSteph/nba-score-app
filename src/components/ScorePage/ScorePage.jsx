@@ -9,6 +9,10 @@ const HomeTitle = styled.h1`
   text-align: center;
   padding-bottom: 20px;
   color: ${customStyles.light_shade_01};
+
+  strong b {
+    color: ${customStyles.accent_shade_03};
+  }
 `;
 
 const CardsContainer = styled.main`
@@ -36,7 +40,12 @@ const HomePageWrapper = styled.div`
 `;
 
 const setDate = () => {
-  return sessionStorage.getItem('curr-date') || formatDate();
+  if ( !sessionStorage.getItem('curr-date') ) {
+    const tempDate = formatDate();
+    sessionStorage.setItem('curr-date', tempDate);
+    return tempDate;
+  }
+  return formatDate();
 };
 
 const setSearch = () => {
@@ -85,7 +94,10 @@ const HomePage = () => {
   return (
     <HomePageWrapper>
       <HomeTitle>
-        {areDatesEqual() ? `Today's Games:` : `Games for ${todaysDate}`}     
+        {areDatesEqual() ? 
+          (<strong><b>Today's</b> Games</strong>) 
+        : 
+          (<strong>Games for<b> {todaysDate}</b></strong>)}     
       </HomeTitle>
       <FilterBar 
         filterInputsData={filterInputsData}
